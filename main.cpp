@@ -3,6 +3,8 @@
 #include <queue>
 #include "Node.h"
 #include "AlgoritmosArbol.h"
+#include "BST.h"
+#include "RedBlackTree.h"
 
 template <typename T>
 void liberarArbol(Node<T>* root) {
@@ -20,6 +22,40 @@ void liberarArbol(Node<T>* root) {
 }
 
 int main() {
+    std::cout << "PROBLEMA 1: BST ITERATIVO\n";
+    BST<int> bstPrueba;
+    int datos[20] = {50, 25, 75, 10, 35, 60, 90, 5, 15, 30, 40, 55, 65, 80, 95, 1, 12, 28, 45, 100};
+    for (int x : datos) {
+        bstPrueba.insert(x);
+    }
+    std::cout << "In-order tras insertar 20 elementos:\n";
+    bstPrueba.inOrder();
+    bstPrueba.remove(25);
+    bstPrueba.remove(100);
+    std::cout << "In-order tras eliminar 25 y 100:\n";
+    bstPrueba.inOrder();
+    std::cout << "Altura del BST: " << bstPrueba.height() << "\n";
+
+    std::cout << "PROBLEMA 2: RED-BLACK TREE VS BST\n";
+    BST<int> bstOrdenado;
+    RedBlackTree<int> rbtOrdenado;
+
+    for (int i = 1; i <= 20; ++i) {
+        bstOrdenado.insert(i);
+        rbtOrdenado.insert(i);
+    }
+
+    std::cout << "Propiedades Red-Black Tree validas?: "
+              << (rbtOrdenado.verifyProperties() ? "Si" : "No") << "\n";
+    std::cout << "Altura BST (20 datos ascendentes): " << bstOrdenado.height() << "\n";
+    std::cout << "Altura RBT (20 datos ascendentes): " << rbtOrdenado.height() << "\n";
+
+    std::cout << "\nPre-Orden BST:\n";
+    bstOrdenado.preOrder();
+
+    std::cout << "Pre-Orden Red-Black Tree:\n\n";
+    rbtOrdenado.preOrder();
+
     /*
      * Arbol de prueba:
      *           10
